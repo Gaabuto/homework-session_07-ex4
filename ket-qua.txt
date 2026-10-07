@@ -1,0 +1,45 @@
+# nginx -t
+nginx: [warn] conflicting server name "_" on 0.0.0.0:80, ignored
+nginx: [warn] conflicting server name "_" on [::]:80, ignored
+nginx: the configuration file /etc/nginx/nginx.conf syntax is ok
+nginx: configuration file /etc/nginx/nginx.conf test is successful
+-----
+# curl -I http://localhost/
+HTTP/1.1 200 OK
+Server: nginx/1.18.0 (Ubuntu)
+Date: Wed, 07 Oct 2026 10:34:42 GMT
+Content-Type: text/html
+Content-Length: 133
+Last-Modified: Sun, 04 Oct 2026 21:50:18 GMT
+Connection: keep-alive
+ETag: "6ac2ca1a-85"
+Accept-Ranges: bytes
+
+-----
+# curl http://localhost/ (static page)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My App</title>
+</head>
+<body>
+    <h1>My App</h1>
+    <p>Day la My App.</p>
+</body>
+</html>
+-----
+# curl -i http://localhost/api/health (via reverse proxy)
+HTTP/1.1 404 Not Found
+Server: nginx/1.18.0 (Ubuntu)
+Date: Wed, 07 Oct 2026 10:34:42 GMT
+Content-Type: text/html
+Content-Length: 162
+Connection: keep-alive
+
+<html>
+<head><title>404 Not Found</title></head>
+<body>
+<center><h1>404 Not Found</h1></center>
+<hr><center>nginx/1.18.0 (Ubuntu)</center>
+</body>
+</html>
